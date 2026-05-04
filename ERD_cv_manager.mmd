@@ -1,0 +1,43 @@
+erDiagram
+
+    CANDIDATE {
+        number cv_id PK
+        varchar40 names
+        varchar40 lastnames
+        varchar40 profesion
+        varchar40 email
+        varchar20 phone_number
+        date birthdate
+        date insertion_date
+        varchar200 cv_file_url
+        clob summary_cv
+    }
+
+    SKILLS {
+        number id PK
+        varchar50 name
+    }
+
+    CANDIDATE_SKILLS {
+        number id_skill FK
+        number id_candidate FK
+    }
+
+    
+    EXPERIENCE {
+        number id PK
+        number id_candidate FK
+        varchar40 company
+        varchar40 role
+        date start_date
+        date end_date
+        CLOB description
+    }
+
+
+     %% RELACIONES
+
+    CANDIDATE ||--o{ EXPERIENCE : has
+
+    CANDIDATE ||--o{ CANDIDATE_SKILLS : has
+    SKILLS ||--o{ CANDIDATE_SKILLS : has
