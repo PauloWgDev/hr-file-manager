@@ -2,6 +2,7 @@ package com.pankosdev.hrmanager.Controllers;
 
 import com.pankosdev.hrmanager.Entities.Candidate;
 import com.pankosdev.hrmanager.Services.CandidateService;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,6 +18,7 @@ public class CandidateController {
         this.candidateService = candidateService;
     }
 
+    @GetMapping
     public List<Candidate> getAllCandidates()
     {
         return candidateService.getAllCandidates();
