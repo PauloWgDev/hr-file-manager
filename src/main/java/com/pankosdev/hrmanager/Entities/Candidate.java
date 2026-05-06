@@ -1,5 +1,6 @@
 package com.pankosdev.hrmanager.Entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -35,7 +36,7 @@ public class Candidate {
 
     private String cvFileUrl;
 
-    @Lob
+    @Column(columnDefinition = "TEXT")
     private String summaryCv;
 
     @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
@@ -47,5 +48,6 @@ public class Candidate {
             joinColumns = @JoinColumn(name = "id_candidate"),
             inverseJoinColumns = @JoinColumn(name = "id_skill")
     )
+    @JsonManagedReference
     private Set<Skill> skills = new HashSet<>();
 }

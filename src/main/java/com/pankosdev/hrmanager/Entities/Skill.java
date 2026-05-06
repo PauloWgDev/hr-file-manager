@@ -1,6 +1,7 @@
 package com.pankosdev.hrmanager.Entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,5 +22,6 @@ public class Skill {
     private String name;
 
     @ManyToMany(mappedBy = "skills")
+    @JsonBackReference
     private Set<Candidate> candidates = new HashSet<>();
 }
