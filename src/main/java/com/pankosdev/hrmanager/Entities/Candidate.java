@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "candidate")
@@ -34,4 +37,15 @@ public class Candidate {
 
     @Lob
     private String summaryCv;
+
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
+    private List<Experience> experiences;
+
+    @ManyToMany
+    @JoinTable(
+            name = "candidate_skills",
+            joinColumns = @JoinColumn(name = "id_candidate"),
+            inverseJoinColumns = @JoinColumn(name = "id_skill")
+    )
+    private Set<Skill> skills = new HashSet<>();
 }
