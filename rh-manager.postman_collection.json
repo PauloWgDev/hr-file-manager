@@ -1,0 +1,19 @@
+{
+  "info": {
+    "_postman_id": "c111d666-3525-4cd6-ad73-e92176860f62",
+    "name": "rh-manager",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52496023",
+    "_collection_link": "https://go.postman.co/collection/52496023-c111d666-3525-4cd6-ad73-e92176860f62?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "[test] get all profiles",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    }
+  ]
+}
