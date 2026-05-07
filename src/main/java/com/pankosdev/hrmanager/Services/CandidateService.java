@@ -11,8 +11,11 @@ import com.pankosdev.hrmanager.Entities.CandidateLanguage;
 import com.pankosdev.hrmanager.Entities.Education;
 import com.pankosdev.hrmanager.Entities.Skill;
 import com.pankosdev.hrmanager.Repositories.*;
+import com.pankosdev.hrmanager.Specifications.CandidateSpecification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import org.springframework.data.jpa.domain.Specification;
 
 import java.io.File;
 import java.io.IOException;
@@ -221,5 +224,60 @@ public class CandidateService {
         }
 
         return candidateRepository.save(candidate);
+    }
+
+
+    public List<CandidateResponseDTO> searchCandidates(
+            String name,
+            String profession,
+            List<String> skills,
+            String language
+    ) {
+
+        Specification<Candidate> specification = null;
+
+        if (name != null && !name.isBlank()) {
+
+            specification = specification == null
+                    ? CandidateSpecification.hasName(name)
+                    : specification.and(
+                    CandidateSpecification.hasName(name)
+            );
+        }
+
+        if (profession != null && !profession.isBlank()) {
+
+            specification = specification == null
+                    ? CandidateSpecification.hasProfession(profession)
+                    : specification.and(
+                    CandidateSpecification.hasProfession(profession)
+            );
+        }
+
+        if (language != null && !language.isBlank()) {
+
+            specification = specification == null
+                    ? CandidateSpecification.hasLanguage(language)
+                    : specification.and(
+                    CandidateSpecification.hasLanguage(language)
+            );
+        }
+
+        if (skills != null) {
+
+            for (String skill : skills) {
+
+                specification = specification == null
+                        ? CandidateSpecification.hasSkill(skill)
+                        : specification.and(
+                        CandidateSpecification.hasSkill(skill)
+                );
+            }
+        }
+
+        return candidateRepository.findAll(specification)
+                .stream()
+                .map(this::mapToResponseDTO)
+                .toList();
     }
 }

@@ -39,4 +39,28 @@ public class CandidateController {
 
         return candidateService.uploadCandidate(candidateDTO, file);
     }
+
+    @GetMapping("/search")
+    public List<CandidateResponseDTO> searchCandidates(
+
+            @RequestParam(required = false)
+            String name,
+
+            @RequestParam(required = false)
+            String profession,
+
+            @RequestParam(required = false)
+            List<String> skills,
+
+            @RequestParam(required = false)
+            String language
+    ) {
+
+        return candidateService.searchCandidates(
+                name,
+                profession,
+                skills,
+                language
+        );
+    }
 }
