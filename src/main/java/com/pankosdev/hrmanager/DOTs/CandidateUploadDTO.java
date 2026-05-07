@@ -1,8 +1,9 @@
-package com.pankosdev.hrmanager.Entities;
+package com.pankosdev.hrmanager.DOTs;
 
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -13,6 +14,8 @@ public class CandidateUploadDTO {
 
     private String lastnames;
 
+    private LocalDate birthdate;
+
     private String profesion;
 
     private String email;
@@ -22,4 +25,8 @@ public class CandidateUploadDTO {
     private String summaryCv;
 
     private List<Integer> skillIds;
+
+    private List<CandidateLanguageDTO> languages;
+
+    private List<EducationDTO> education;
 }

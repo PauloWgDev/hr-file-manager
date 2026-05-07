@@ -35,9 +35,54 @@ erDiagram
     }
 
 
+    ACADEMIC_INSTITUTION {
+        number id PK
+        varchar40 name
+        varchar10 abbreviation
+        varchar30 country
+        varchar30 city
+        varchar200 website
+    }
+
+
+    EDUCATION {
+        number id PK
+        number id_candidate FK
+        number id_institution FK
+        varchar40 degree
+        date start_date
+        date end_date
+        CLOB description
+    }
+
+    LANGUAGES {
+        number id PK
+        varchar20 name
+    }
+
+    LANGUAGE_PROFICIENCY {
+        number id PK
+        varchar40 description
+    }
+
+    CANDIDATE_LANGUAGE {
+        number id_language FK
+        number id_candidate FK
+        number id_proficiency FK
+    }
+
+
      %% RELACIONES
 
     CANDIDATE ||--o{ EXPERIENCE : has
+    CANDIDATE ||--o{ EDUCATION : has
+
+    ACADEMIC_INSTITUTION ||--o{ EDUCATION : has
+
+    CANDIDATE_LANGUAGE ||--o{ LANGUAGE_PROFICIENCY : has
 
     CANDIDATE ||--o{ CANDIDATE_SKILLS : has
     SKILLS ||--o{ CANDIDATE_SKILLS : has
+
+    CANDIDATE ||--o{ CANDIDATE_LANGUAGE : has
+    LANGUAGES ||--o{ CANDIDATE_LANGUAGE : has

@@ -7,13 +7,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "candidate")
-@Data
 @Getter
 @Setter
 public class Candidate {
@@ -39,9 +39,6 @@ public class Candidate {
     @Column(columnDefinition = "TEXT")
     private String summaryCv;
 
-    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
-    private List<Experience> experiences;
-
     @ManyToMany
     @JoinTable(
             name = "candidate_skills",
@@ -50,4 +47,15 @@ public class Candidate {
     )
     @JsonManagedReference
     private Set<Skill> skills = new HashSet<>();
+
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
+    private List<Experience> experiences;
+
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Set<CandidateLanguage> languages = new HashSet<>();
+
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Education> education = new ArrayList<>();
 }
