@@ -1,6 +1,7 @@
 package com.pankosdev.hrmanager.Controllers;
 
 import com.pankosdev.hrmanager.DOTs.CandidateUploadDTO;
+import com.pankosdev.hrmanager.DOTs.responses.CandidateResponseDTO;
 import com.pankosdev.hrmanager.Entities.Candidate;
 import com.pankosdev.hrmanager.Services.CandidateService;
 import org.springframework.http.MediaType;
@@ -20,8 +21,9 @@ public class CandidateController {
         this.candidateService = candidateService;
     }
 
+
     @GetMapping
-    public List<Candidate> getAllCandidates()
+    public List<CandidateResponseDTO> getAllCandidates()
     {
         return candidateService.getAllCandidates();
     }

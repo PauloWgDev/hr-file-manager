@@ -3,6 +3,9 @@ package com.pankosdev.hrmanager.Services;
 import com.pankosdev.hrmanager.DOTs.CandidateLanguageDTO;
 import com.pankosdev.hrmanager.DOTs.CandidateUploadDTO;
 import com.pankosdev.hrmanager.DOTs.EducationDTO;
+import com.pankosdev.hrmanager.DOTs.responses.CandidateResponseDTO;
+import com.pankosdev.hrmanager.DOTs.responses.EducationResponseDTO;
+import com.pankosdev.hrmanager.DOTs.responses.LanguageResponseDTO;
 import com.pankosdev.hrmanager.Entities.Candidate;
 import com.pankosdev.hrmanager.Entities.CandidateLanguage;
 import com.pankosdev.hrmanager.Entities.Education;
@@ -48,9 +51,83 @@ public class CandidateService {
         this.academicInstitutionRepository = academicInstitutionRepository;
     }
 
-    public List<Candidate> getAllCandidates()
+    private CandidateResponseDTO mapToResponseDTO(
+            Candidate candidate
+    ) {
+        CandidateResponseDTO dto = new CandidateResponseDTO();
+
+        dto.setCvId(candidate.getCvId());
+        dto.setNames(candidate.getNames());
+        dto.setLastnames(candidate.getLastnames());
+        dto.setProfesion(candidate.getProfesion());
+        dto.setEmail(candidate.getEmail());
+        dto.setPhoneNumber(candidate.getPhoneNumber());
+        dto.setBirthdate(candidate.getBirthdate());
+        dto.setInsertionDate(candidate.getInsertionDate());
+        dto.setSummaryCv(candidate.getSummaryCv());
+        dto.setCvFileUrl(candidate.getCvFileUrl());
+
+        // Skills
+        dto.setSkills(
+                candidate.getSkills()
+                        .stream()
+                        .map(Skill::getName)
+                        .toList()
+        );
+
+        // Languages
+        dto.setLanguages(
+                candidate.getLanguages()
+                        .stream()
+                        .map(language -> {
+                            LanguageResponseDTO languageDTO =
+                                    new LanguageResponseDTO();
+                            languageDTO.setName(
+                                    language.getLanguage().getName()
+                            );
+                            languageDTO.setProficiency(
+                                    language.getProficiency()
+                                            .getDescription()
+                            );
+                            return languageDTO;
+                        }).toList()
+        );
+
+        // Education
+        dto.setEducation(
+                candidate.getEducation()
+                        .stream()
+                        .map(education -> {
+                            EducationResponseDTO educationDTO =
+                                    new EducationResponseDTO();
+                            educationDTO.setInstitution(
+                                    education.getInstitution()
+                                            .getName()
+                            );
+                            educationDTO.setDegree(
+                                    education.getDegree()
+                            );
+                            educationDTO.setStartDate(
+                                    education.getStartDate()
+                            );
+                            educationDTO.setEndDate(
+                                    education.getEndDate()
+                            );
+                            educationDTO.setDescription(
+                                    education.getDescription()
+                            );
+                            return educationDTO;
+                        }).toList()
+        );
+        return dto;
+    }
+
+    public List<CandidateResponseDTO> getAllCandidates()
     {
-        return candidateRepository.findAll();
+        return candidateRepository.findAll()
+                .stream()
+                .map(this::mapToResponseDTO)
+                .toList();
     }
 
     public Candidate uploadCandidate(
