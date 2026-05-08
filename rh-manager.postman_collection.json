@@ -8,7 +8,64 @@
   },
   "item": [
     {
-      "name": "[test] get all profiles",
+      "name": "Retrieve All",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/candidates",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "candidates"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Upload CV",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "type": "text",
+              "contentType": "application/json",
+              "key": "candidate",
+              "value": "{\n\n\"names\":\"Pepe\",\n\n\"lastnames\":\"Pepardo\",\n\n\"profesion\":\"Contador\",\n\n\"email\":\"pepe@example.com\",\n\n\"phoneNumber\":\"+5959889526\",\n\n\"birthdate\":\"2000-11-10\",\n\n\"summaryCv\":\"sabe contar\",\n\n\"skillIds\":[1,2],\n\n\"languages\":[\n\n{\n\n\"languageId\":1,\n\n\"proficiencyId\":2\n\n}, \n{\n\n\"languageId\":2,\n\n\"proficiencyId\":3\n\n}\n\n],\n\n\"education\":[\n\n{\n\n\"institutionId\":1,\n\n\"degree\":\"Licenciatura\",\n\n\"startDate\":\"2021-01-01\",\n\n\"endDate\":\"2025-01-01\",\n\n\"description\":\"Foco en contar\"\n\n}\n\n]\n\n}"
+            },
+            {
+              "type": "file",
+              "key": "file",
+              "src": "/C:/Users/pnwp/Pictures/224801.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/candidates/upload",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "candidates",
+            "upload"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Search",
       "request": {
         "method": "GET",
         "header": []
