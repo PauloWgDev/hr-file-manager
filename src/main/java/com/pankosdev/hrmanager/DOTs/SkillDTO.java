@@ -1,10 +1,10 @@
-package com.pankosdev.hrmanager.DOTs.responses;
+package com.pankosdev.hrmanager.DOTs;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class SkillResponseDTO {
+public class SkillDTO {
     private String name;
 }
