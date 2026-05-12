@@ -14,5 +14,6 @@ public class LanguageProficiency {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String description;
 }

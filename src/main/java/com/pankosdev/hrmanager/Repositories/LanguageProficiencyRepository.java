@@ -4,4 +4,5 @@ import com.pankosdev.hrmanager.Entities.LanguageProficiency;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface LanguageProficiencyRepository extends JpaRepository<LanguageProficiency, Long> {
+    boolean existsByDescription(String description);
 }

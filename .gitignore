@@ -37,5 +37,6 @@ out/
 .vscode/
 
 run.ps1
+run.sh
 
 replay_pid14972.log
